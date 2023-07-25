@@ -56,8 +56,9 @@ function App() {
     const data = await response.json();
   }
   async function deleteMovieHandler(id) {
+    console.log(id)
     const response = await fetch(
-      "https://addmovie-551ea-default-rtdb.firebaseio.com/movies.json",
+      `https://addmovie-551ea-default-rtdb.firebaseio.com/movies/${id}.json/`,
       {
         method: "DELETE",
         body: JSON.stringify(id),
