@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import MovieForm from "./components/MovieForm";
 import MoviesList from "./components/MoviesList";
 import "./App.css";
 
@@ -30,7 +30,9 @@ function App() {
     }
     setisLoading(false);
   }
-  useEffect(fetchMoviesHandler, []);
+  useEffect(() => {
+    fetchMoviesHandler();
+  }, []);
 
   let content = <p>Found no movies</p>;
   if (movies.length > 0) {
@@ -42,8 +44,16 @@ function App() {
   if (error) {
     content = <p>{error}</p>;
   }
+
+  const onaddHandler = (mov) => {
+    setMovies((preval) => {
+      return [...preval, mov];
+    });
+  };
+
   return (
     <React.Fragment>
+      <MovieForm onadd={onaddHandler} />
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
